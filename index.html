@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Third Eye Digital | Digital Infrastructure & Security</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23151515'/><rect x='20' y='20' width='60' height='60' fill='none' stroke='%23ff0000' stroke-width='2'/><circle cx='50' cy='50' r='15' fill='%23ff0000'/><circle cx='50' cy='50' r='8' fill='%23000'/><path d='M 50 35 Q 55 40, 50 45 Q 45 40, 50 35' fill='%23ff0000'/></svg>">
+    <title>Third Eye Digital - Technical Services | Security, Infrastructure & Automation</title>
+    <meta name="description" content="Professional technical services for small businesses. Security audits, website optimization, migrations, automation, and infrastructure management. Fixed pricing, fast delivery.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --concrete: #1a1a1a;
-            --steel: #2d2d2d;
-            --iron: #3a3a3a;
-            --warning: #ff0000;
-            --alert: #ff4444;
-            --secure: #00ff00;
-            --gray: #666666;
-            --white: #e0e0e0;
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --text-dim: #a0a0a0;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --warning: #ff6b35;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'IBM Plex Sans', sans-serif;
         }
 
         * {
@@ -27,656 +29,817 @@
         }
 
         body {
-            font-family: 'Share Tech Mono', monospace;
-            background: var(--concrete);
-            color: var(--white);
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.6;
             overflow-x: hidden;
-            cursor: crosshair;
         }
 
-        /* Concrete texture */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.4;
-            z-index: -1;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 255, 255, 0.03) 2px,
-                    rgba(255, 255, 255, 0.03) 4px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 255, 255, 0.03) 2px,
-                    rgba(255, 255, 255, 0.03) 4px
-                );
-            background-size: 50px 50px;
-        }
-
-        /* Security HUD overlay */
-        .security-hud {
+        .noise {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
         }
 
-        .hud-corner {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--warning);
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .hud-corner.top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; }
-        .hud-corner.top-right { top: 20px; right: 20px; border-left: none; border-bottom: none; }
-        .hud-corner.bottom-left { bottom: 20px; left: 20px; border-right: none; border-top: none; }
-        .hud-corner.bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; }
-
-        .scanning-line {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--warning), transparent);
-            opacity: 0.3;
-            animation: scan 4s ease-in-out infinite;
-        }
-
-        @keyframes scan {
-            0%, 100% { top: 0%; }
-            50% { top: 100%; }
-        }
-
-        .system-status {
-            position: fixed;
-            top: 20px;
-            right: 60px;
-            font-size: 0.8rem;
-            color: var(--warning);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            animation: pulse 2s infinite;
-            z-index: 1001;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--warning);
-            border-radius: 50%;
-            margin-right: 0.5rem;
-            box-shadow: 0 0 10px var(--warning);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            background: 
-                radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1), transparent),
-                linear-gradient(180deg, var(--concrete) 0%, var(--steel) 100%);
-        }
-
-        .logo-container {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 3rem;
-            position: relative;
-            border: 3px solid var(--warning);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: rotate-border 10s linear infinite;
-        }
-
-        @keyframes rotate-border {
-            0% { border-color: var(--warning); transform: rotate(0deg); }
-            50% { border-color: var(--alert); }
-            100% { border-color: var(--warning); transform: rotate(360deg); }
-        }
-
-        .logo-inner {
-            width: 80%;
-            height: 80%;
-            border: 2px solid var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        header {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
             position: relative;
         }
 
-        .eye-icon {
-            font-size: 3rem;
-            color: var(--warning);
-            animation: blink 4s infinite;
-        }
-
-        @keyframes blink {
-            0%, 45%, 55%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        h1 {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: clamp(3rem, 12vw, 9rem);
+        .logo {
+            font-family: var(--mono);
+            font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            line-height: 0.9;
-            text-shadow: 
-                2px 2px 0 var(--warning),
-                4px 4px 20px rgba(255, 0, 0, 0.5);
-            animation: glitch 6s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 90%, 100% { 
-                transform: translate(0);
-                text-shadow: 2px 2px 0 var(--warning), 4px 4px 20px rgba(255, 0, 0, 0.5);
-            }
-            92% { 
-                transform: translate(-3px, 0);
-                text-shadow: -2px 2px 0 var(--secure), 4px 4px 20px rgba(0, 255, 0, 0.5);
-            }
-            94% { 
-                transform: translate(3px, 0);
-                text-shadow: 2px -2px 0 var(--alert), 4px 4px 20px rgba(255, 68, 68, 0.5);
-            }
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
         .tagline {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--warning);
-            margin-bottom: 3rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5em;
-            opacity: 0;
-            animation: fade-in 1s ease-out 0.5s forwards;
+            font-family: var(--mono);
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
         }
 
-        @keyframes fade-in {
-            to { opacity: 1; transform: translateY(0); }
-            from { opacity: 0; transform: translateY(30px); }
-        }
-
-        .security-notice {
-            max-width: 600px;
-            padding: 2rem;
-            border: 2px solid var(--warning);
-            background: rgba(0, 0, 0, 0.7);
-            margin-top: 2rem;
-            position: relative;
-            opacity: 0;
-            animation: fade-in 1s ease-out 1s forwards;
-        }
-
-        .security-notice::before {
-            content: '⚠ SECURE TRANSMISSION ⚠';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--concrete);
-            padding: 0 1rem;
-            color: var(--warning);
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 8rem 2rem;
-            background: var(--steel);
+        .hero {
+            padding: 6rem 0 4rem;
             position: relative;
         }
 
-        .services::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--warning),
-                var(--warning) 20px,
-                transparent 20px,
-                transparent 40px
-            );
-        }
-
-        .section-title {
-            font-family: 'Rajdhani', sans-serif;
+        h1 {
             font-size: clamp(2.5rem, 8vw, 5rem);
-            text-align: center;
-            margin-bottom: 4rem;
-            letter-spacing: 0.2em;
             font-weight: 700;
-            color: var(--white);
-            text-shadow: 2px 2px 0 var(--warning);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .highlight {
+            color: var(--accent);
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            color: var(--text-dim);
+            max-width: 800px;
+            margin-bottom: 3rem;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-family: var(--mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            border-color: var(--text);
+            color: var(--text);
         }
 
         .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            padding: 4rem 0;
         }
 
-        .service-module {
-            background: var(--concrete);
-            border: 2px solid var(--iron);
-            padding: 2.5rem 2rem;
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
             position: relative;
             transition: all 0.3s ease;
-            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
         }
 
-        .service-module::before {
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--warning);
-            clip-path: polygon(100% 0, 0 0, 100% 100%);
-        }
-
-        .service-module::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--warning);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s ease;
         }
 
-        .service-module:hover::after {
-            transform: scaleX(1);
+        .service-card:hover::before {
+            height: 100%;
         }
 
-        .service-module:hover {
-            border-color: var(--warning);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
-        }
-
-        .service-code {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--warning);
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1rem;
-            letter-spacing: 0.2em;
         }
 
         .service-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--white);
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-family: var(--mono);
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         .service-description {
-            line-height: 1.8;
-            opacity: 0.9;
-            font-size: 0.95rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
-        /* Access Panel CTA */
-        .access-panel {
-            padding: 8rem 2rem;
-            background: 
-                linear-gradient(180deg, var(--steel) 0%, var(--concrete) 100%),
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 10px,
-                    rgba(255, 0, 0, 0.05) 10px,
-                    rgba(255, 0, 0, 0.05) 20px
-                );
-            text-align: center;
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
             position: relative;
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
-        .panel-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 3rem;
-            background: var(--concrete);
-            border: 3px solid var(--warning);
-            position: relative;
-            box-shadow: 
-                inset 0 0 50px rgba(255, 0, 0, 0.1),
-                0 0 50px rgba(255, 0, 0, 0.2);
+        .service-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: var(--mono);
         }
 
-        .panel-header {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: clamp(2rem, 6vw, 4rem);
+        .service-meta {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: -0.02em;
         }
 
-        .panel-subtext {
-            font-size: 1.2rem;
-            opacity: 0.8;
+        .section-subtitle {
+            color: var(--text-dim);
+            font-size: 1.125rem;
             margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
+            max-width: 700px;
         }
 
-        .access-button {
-            display: inline-block;
-            padding: 2rem 4rem;
-            background: var(--warning);
-            color: var(--concrete);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.8rem;
+        .process-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step-number {
+            font-family: var(--mono);
+            font-size: 3rem;
             font-weight: 700;
-            letter-spacing: 0.3em;
-            text-decoration: none;
+            color: var(--accent);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-detail:last-child {
+            border-bottom: none;
+        }
+
+        .contact-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
             text-transform: uppercase;
-            border: 3px solid var(--warning);
+            letter-spacing: 0.05em;
+            min-width: 80px;
+        }
+
+        .contact-value {
+            color: var(--accent);
+            font-family: var(--mono);
+        }
+
+        .contact-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: var(--text-dim);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .retainer-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .retainer-card {
+            background: linear-gradient(135deg, var(--surface) 0%, #1a1a1a 100%);
+            border: 2px solid var(--accent);
+            padding: 3rem;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
 
-        .access-button::before {
+        .retainer-card::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--concrete);
-            transform: translate(-50%, -50%);
-            transition: width 0.5s ease, height 0.5s ease;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.05;
+            pointer-events: none;
         }
 
-        .access-button:hover::before {
-            width: 500px;
-            height: 500px;
-        }
-
-        .access-button:hover {
-            color: var(--warning);
-            box-shadow: 
-                0 0 30px var(--warning),
-                inset 0 0 30px rgba(255, 0, 0, 0.2);
-        }
-
-        .access-button span {
+        .retainer-content {
             position: relative;
             z-index: 1;
         }
 
-        /* Footer */
-        .footer {
-            padding: 3rem 2rem;
-            text-align: center;
-            background: var(--concrete);
-            border-top: 2px solid var(--warning);
-            position: relative;
+        .retainer-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .footer-grid {
+        .retainer-price {
+            font-family: var(--mono);
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .retainer-features {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            gap: 2rem;
-            text-align: left;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .footer-section {
-            opacity: 0.7;
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
         }
 
-        .footer-title {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: var(--warning);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
+        .footer-content {
+            font-family: var(--mono);
+            font-size: 0.875rem;
+            color: var(--text-dim);
         }
 
-        .footer-text {
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-
-        .copyright {
-            opacity: 0.5;
-            font-size: 0.8rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--iron);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .footer-grid {
+        @media (max-width: 768px) {
+            .contact-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
+                gap: 2rem;
             }
 
-            .panel-container {
-                padding: 3rem 2rem;
+            .services-grid {
+                grid-template-columns: 1fr;
             }
 
-            .access-button {
-                padding: 1.5rem 3rem;
-                font-size: 1.4rem;
+            h1 {
+                font-size: 2.5rem;
             }
 
-            .security-notice {
-                padding: 1.5rem;
+            .retainer-card {
+                padding: 2rem;
+            }
+
+            .retainer-features {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Scroll reveal */
-        .reveal {
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card,
+        .step,
+        .retainer-card {
+            animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+        .service-card:nth-child(7) { animation-delay: 0.7s; }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+
+        .retainer-card { animation-delay: 0.2s; }
     </style>
 </head>
 <body>
-    <!-- Security HUD -->
-    <div class="security-hud">
-        <div class="hud-corner top-left"></div>
-        <div class="hud-corner top-right"></div>
-        <div class="hud-corner bottom-left"></div>
-        <div class="hud-corner bottom-right"></div>
-        <div class="scanning-line"></div>
-    </div>
+    <div class="noise"></div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">Third Eye Digital</div>
+            <div class="tagline">// Technical Services & Infrastructure</div>
+        </div>
+    </header>
 
-    <div class="system-status">
-        <span class="status-dot"></span>MONITORING ACTIVE
-    </div>
-
-    <!-- Hero -->
     <section class="hero">
-        <div class="logo-container">
-            <div class="logo-inner">
-                <div class="eye-icon">◉</div>
-            </div>
-        </div>
-
-        <h1>THIRD EYE<br>DIGITAL</h1>
-        <p class="tagline">Infrastructure Security</p>
-
-        <div class="security-notice">
-            <p>Digital infrastructure built on security-first principles. We don't just monitor threats—we architect systems that make attacks irrelevant.</p>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section class="services">
-        <h2 class="section-title reveal">SECURITY PROTOCOLS</h2>
-        <div class="services-grid">
-            <div class="service-module reveal">
-                <div class="service-code">[SYS-01]</div>
-                <h3 class="service-title">Infrastructure Hardening</h3>
-                <p class="service-description">
-                    Server architecture designed to withstand attacks. Redundancy built in. Zero single points of failure. Your systems stay operational when others go dark.
-                </p>
-            </div>
-
-            <div class="service-module reveal">
-                <div class="service-code">[SYS-02]</div>
-                <h3 class="service-title">Network Security</h3>
-                <p class="service-description">
-                    Perimeter defense that actually works. Intrusion detection, traffic analysis, threat mitigation. We see attacks before they see you.
-                </p>
-            </div>
-
-            <div class="service-module reveal">
-                <div class="service-code">[SYS-03]</div>
-                <h3 class="service-title">Data Protection</h3>
-                <p class="service-description">
-                    Encryption at rest and in transit. Backup systems that actually work when you need them. Your data stays yours—even when under attack.
-                </p>
-            </div>
-
-            <div class="service-module reveal">
-                <div class="service-code">[SYS-04]</div>
-                <h3 class="service-title">Threat Monitoring</h3>
-                <p class="service-description">
-                    24/7 surveillance of your digital perimeter. Real-time alerts. Rapid response protocols. We don't sleep, so you can.
-                </p>
-            </div>
-
-            <div class="service-module reveal">
-                <div class="service-code">[SYS-05]</div>
-                <h3 class="service-title">Penetration Testing</h3>
-                <p class="service-description">
-                    We break into your systems before attackers do. Identify vulnerabilities. Patch holes. Harden defenses. Better us than them.
-                </p>
-            </div>
-
-            <div class="service-module reveal">
-                <div class="service-code">[SYS-06]</div>
-                <h3 class="service-title">Incident Response</h3>
-                <p class="service-description">
-                    When breaches happen, speed matters. Containment protocols. Forensic analysis. System recovery. Minimize damage, maximize learning.
-                </p>
+        <div class="container">
+            <h1>Professional Technical Services.<br><span class="highlight">Fixed Pricing.</span><br>Clear Deliverables.</h1>
+            <p class="subtitle">Security audits, website optimization, migrations, automation, and infrastructure management for small businesses. Fixed pricing, fast delivery, professional results.</p>
+            <div class="cta-section">
+                <a href="#services" class="btn">View Services</a>
+                <a href="#contact" class="btn btn-secondary">Get Started</a>
             </div>
         </div>
     </section>
 
-    <!-- Access Panel CTA -->
-    <section class="access-panel">
-        <div class="panel-container">
-            <h2 class="panel-header">REQUEST ACCESS</h2>
-            <p class="panel-subtext">Secure Communications Channel</p>
-            <a href="mailto:enquiries@thirdeyedigital.co.uk" class="access-button">
-                <span>INITIATE CONTACT</span>
-            </a>
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <p class="section-subtitle">Productized technical services designed to solve specific problems. Pick what you need, pay upfront, get it done.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">Security Audit</h3>
+                        </div>
+                        <div class="service-price">£600-1000</div>
+                    </div>
+                    <p class="service-description">Comprehensive security assessment of your website or web application. Automated scanning plus manual review, delivered as actionable report.</p>
+                    <ul class="service-features">
+                        <li>Vulnerability scanning and assessment</li>
+                        <li>SSL/TLS configuration review</li>
+                        <li>Security headers analysis</li>
+                        <li>Detailed report with prioritized fixes</li>
+                        <li>Optional: Implementation of fixes (quoted separately)</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 3-5 business days</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">Website Speed Optimization</h3>
+                        </div>
+                        <div class="service-price">£600-900</div>
+                    </div>
+                    <p class="service-description">Make your site faster. Better rankings, better conversions, better user experience. Guaranteed measurable improvement.</p>
+                    <ul class="service-features">
+                        <li>PageSpeed analysis and optimization</li>
+                        <li>Image compression and optimization</li>
+                        <li>Caching implementation</li>
+                        <li>CDN setup via Cloudflare</li>
+                        <li>Before/after performance metrics</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 3-7 business days</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">SSL & Security Hardening</h3>
+                        </div>
+                        <div class="service-price">£200-300</div>
+                    </div>
+                    <p class="service-description">Proper SSL implementation, force HTTPS, security headers, basic hardening. Make your site trustworthy and secure.</p>
+                    <ul class="service-features">
+                        <li>SSL certificate setup (Cloudflare or Let's Encrypt)</li>
+                        <li>Force HTTPS site-wide</li>
+                        <li>Security headers implementation</li>
+                        <li>Basic server hardening</li>
+                        <li>SSL rating verification (A+ grade)</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 2-3 business days</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">Domain & Email Migration</h3>
+                        </div>
+                        <div class="service-price">£400-750</div>
+                    </div>
+                    <p class="service-description">Migrate domains and email without downtime. Cloudflare DNS setup, Migadu email configuration, full migration support.</p>
+                    <ul class="service-features">
+                        <li>Domain transfer to Cloudflare (or registrar of choice)</li>
+                        <li>DNS configuration and testing</li>
+                        <li>Email migration to Migadu (or alternative)</li>
+                        <li>MX record setup and verification</li>
+                        <li>Zero downtime migration process</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 5-10 business days</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">Backup & Disaster Recovery</h3>
+                        </div>
+                        <div class="service-price">£250-500</div>
+                    </div>
+                    <p class="service-description">Automated backup system setup. Your data protected, recoverable, and tested. Sleep better at night.</p>
+                    <ul class="service-features">
+                        <li>Automated backup configuration</li>
+                        <li>Multiple backup locations (redundancy)</li>
+                        <li>Backup testing and verification</li>
+                        <li>Recovery procedure documentation</li>
+                        <li>Optional: Monthly monitoring (retainer)</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 3-5 business days</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">Business Automation</h3>
+                        </div>
+                        <div class="service-price">from £550</div>
+                    </div>
+                    <p class="service-description">Connect your tools, automate repetitive tasks. Zapier, Make, n8n workflows that save you hours every week.</p>
+                    <ul class="service-features">
+                        <li>Process analysis and automation design</li>
+                        <li>Workflow implementation (per automation)</li>
+                        <li>CRM, email, calendar, social media integrations</li>
+                        <li>Testing and handover documentation</li>
+                        <li>Common: CRM sync, social posting, booking automation</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 5-7 business days per workflow</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div>
+                            <h3 class="service-title">Telegram Bot Implementation</h3>
+                        </div>
+                        <div class="service-price">£850+</div>
+                    </div>
+                    <p class="service-description">Custom Telegram bot for customer service, bookings, notifications, or e-commerce. Automated support that works 24/7.</p>
+                    <ul class="service-features">
+                        <li>Requirements analysis and bot design</li>
+                        <li>Custom bot development</li>
+                        <li>Integration with your systems</li>
+                        <li>Testing and deployment</li>
+                        <li>Optional: Monthly hosting (£50/month)</li>
+                    </ul>
+                    <div class="service-meta">Delivery: 10-15 business days</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <div class="footer-title">Location</div>
-                <div class="footer-text">Leeds, UK<br>Global Operations</div>
-            </div>
-            <div class="footer-section">
-                <div class="footer-title">Services</div>
-                <div class="footer-text">Infrastructure Security<br>Threat Monitoring<br>Digital Defense</div>
-            </div>
-            <div class="footer-section">
-                <div class="footer-title">Status</div>
-                <div class="footer-text">Systems Operational<br>24/7 Monitoring Active</div>
+    <section class="retainer-section">
+        <div class="container">
+            <div class="retainer-card">
+                <div class="retainer-content">
+                    <div class="badge">Monthly Retainer</div>
+                    <h2 class="retainer-title">Ongoing Monitoring & Maintenance</h2>
+                    <div class="retainer-price">from £200/month</div>
+                    <p class="service-description">For clients who want peace of mind. We keep an eye on your infrastructure, catch problems before they become disasters, and handle routine maintenance.</p>
+                    <div class="retainer-features">
+                        <div class="service-features">
+                            <li>Monthly security scans</li>
+                            <li>Performance monitoring</li>
+                            <li>Backup verification</li>
+                        </div>
+                        <div class="service-features">
+                            <li>SSL certificate renewal</li>
+                            <li>Priority support response</li>
+                            <li>Monthly status reports</li>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn">Enquire About Retainer</a>
+                </div>
             </div>
         </div>
-        <div class="copyright">
-            &copy; 2025 THIRD EYE DIGITAL | ALL SYSTEMS SECURE
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Straightforward process. Clear communication, realistic timelines, professional delivery.</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">Submit Enquiry</h3>
+                    <p class="step-description">Fill out the contact form with your requirements. I'll respond within 24 hours to confirm scope, pricing, and timeline.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">Confirm & Pay</h3>
+                    <p class="step-description">Once you're happy with the quote, payment options include PayPal, bank transfer, or cryptocurrency. Work begins as soon as payment clears.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">Delivery</h3>
+                    <p class="step-description">Work gets done within stated timeframe. You receive all deliverables (reports, configurations, documentation) as specified.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <h3 class="step-title">Follow-Up</h3>
+                    <p class="step-description">Need ongoing support? Consider the monthly retainer. Need another service? Just get in touch. One-off projects are completely fine too.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get Started</h2>
+            <p class="section-subtitle">Fill out the form below with your requirements. We'll respond within 24 hours with a quote and timeline.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>For urgent enquiries or if you prefer direct contact:</p>
+                    
+                    <div class="contact-detail">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae2e5f9fee3e4edcafee2e3f8eeeff3efeee3ede3feebe6a4e9e5a4ffe1">[email&#160;protected]</a></span>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <span class="contact-label">Location</span>
+                        <span class="contact-value">Leeds, Yorkshire, UK</span>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <span class="contact-label">Response</span>
+                        <span class="contact-value">&lt; 24 hours</span>
+                    </div>
+
+                    <p style="margin-top: 2rem; font-size: 0.9rem;">All services can be delivered remotely. UK-based clients preferred but international projects considered on case-by-case basis.</p>
+                </div>
+
+                <div class="contact-form">
+                    <form id="serviceForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Required</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service...</option>
+                                <option value="security-audit">Security Audit (£600-1000)</option>
+                                <option value="speed-optimization">Website Speed Optimization (£600-900)</option>
+                                <option value="ssl-hardening">SSL & Security Hardening (£200-300)</option>
+                                <option value="migration">Domain & Email Migration (£400-750)</option>
+                                <option value="backup">Backup & Disaster Recovery (£250-500)</option>
+                                <option value="automation">Business Automation (from £550/workflow)</option>
+                                <option value="telegram-bot">Telegram Bot Implementation (£850+)</option>
+                                <option value="retainer">Monthly Retainer (from £200/month)</option>
+                                <option value="custom">Custom Project (Need Quote)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Website/Company URL (if applicable)</label>
+                            <input type="url" id="website" name="website">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="details">Project Details</label>
+                            <textarea id="details" name="details" placeholder="What do you need? Current setup? Any specific requirements or constraints?" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeline">Preferred Timeline</label>
+                            <input type="text" id="timeline" name="timeline" placeholder="e.g., ASAP, Within 2 weeks, Flexible">
+                        </div>
+
+                        <button type="submit" class="btn form-submit">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                © 2025 Third Eye Digital // Technical Services & Infrastructure // Leeds, Yorkshire, UK
+            </div>
         </div>
     </footer>
 
-    <script>
-        // Scroll reveal
-        const reveals = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            reveals.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('active');
-                }
-            });
-        };
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.getElementById('serviceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Construct mailto link
+            const subject = `Service Enquiry: ${data.service}`;
+            const body = `
+Name: ${data.name}
+Email: ${data.email}
+Service: ${data.service}
+Website: ${data.website || 'N/A'}
+Timeline: ${data.timeline || 'Not specified'}
 
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
-
-        // Cursor trail effect
-        let mouseX = 0;
-        let mouseY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // Random glitch effect on title
-        setInterval(() => {
-            const title = document.querySelector('h1');
-            if (Math.random() > 0.95) {
-                title.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
-                setTimeout(() => {
-                    title.style.transform = 'translate(0, 0)';
-                }, 50);
-            }
-        }, 100);
-    </script>
-</body>
-</html>
+Project Details:
+${data.details}
+            `.trim();
+            
+            const mailtoLink = `mailto:hosting@thirdeyedigital.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            window.location.href = mailtoLink;
+            
+            // Show confirmation
+            alert('Opening your email client... If it doesn\'t open automatically, please email hosting@thirdeyedigital.co.uk directly.');
+        })
