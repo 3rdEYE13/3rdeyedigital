@@ -3,11 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Third Eye Digital - Technical Services | Security, Infrastructure & Automation</title>
-    <meta name="description" content="Professional technical services for small businesses. Security audits, website optimization, migrations, automation, and infrastructure management. Fixed pricing, fast delivery.">
+    <title>Third Eye Digital - Security Audits, Infrastructure Hardening & Technical Services | Leeds</title>
+    <meta name="description" content="Professional security audits and infrastructure hardening in Leeds. Protect your business from attacks, data breaches, and ransomware. Website optimization, migrations, automation. Fixed pricing, expert delivery.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Schema Markup for Local SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Third Eye Digital",
+      "description": "Professional technical services for small businesses including security audits, website optimization, migrations, automation, and infrastructure management.",
+      "url": "https://thirdeyedigital.co.uk",
+      "email": "hosting@thirdeyedigital.co.uk",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Leeds",
+        "addressRegion": "Yorkshire",
+        "addressCountry": "GB"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "53.8008",
+        "longitude": "-1.5491"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "priceRange": "£200-£1000",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Technical Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Security Audit",
+              "description": "Comprehensive security assessment of websites and web applications"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Website Speed Optimization",
+              "description": "Performance optimization for faster loading websites"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Domain & Email Migration",
+              "description": "Zero-downtime migration to Cloudflare and Migadu"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    
     <style>
         :root {
             --bg: #0a0a0a;
@@ -530,8 +589,8 @@
 
     <section class="hero">
         <div class="container">
-            <h1>Professional Technical Services.<br><span class="highlight">Fixed Pricing.</span><br>Clear Deliverables.</h1>
-            <p class="subtitle">Security audits, website optimization, migrations, automation, and infrastructure management for small businesses. Fixed pricing, fast delivery, professional results.</p>
+            <h1>Secure Your Infrastructure.<br><span class="highlight">Optimize Performance.</span><br>Sleep Better.</h1>
+            <p class="subtitle">Expert security audits, infrastructure hardening, and performance optimization for businesses that take their digital presence seriously. Based in Leeds, protecting UK businesses from threats they don't see coming.</p>
             <div class="cta-section">
                 <a href="#services" class="btn">View Services</a>
                 <a href="#contact" class="btn btn-secondary">Get Started</a>
@@ -539,10 +598,42 @@
         </div>
     </section>
 
+    <section class="retainer-section" style="border-top: 1px solid var(--border); padding: 4rem 0;">
+        <div class="container">
+            <div class="retainer-card" style="border-color: var(--warning);">
+                <div class="retainer-content">
+                    <div class="badge" style="background: var(--warning);">Security Reality Check</div>
+                    <h2 class="retainer-title">Your Website Is Being Attacked Right Now</h2>
+                    <p class="service-description" style="font-size: 1.125rem; margin-bottom: 2rem;">Automated bots scan millions of websites daily looking for vulnerabilities. Outdated plugins, weak passwords, misconfigured SSL, missing security headers - attackers find these in seconds. Most business owners don't know they've been compromised until customer data is leaked or Google blacklists their site.</p>
+                    <div class="retainer-features" style="margin-bottom: 2rem;">
+                        <div>
+                            <h3 style="color: var(--warning); margin-bottom: 1rem;">Common Threats We Stop:</h3>
+                            <div class="service-features">
+                                <li>Brute force attacks on admin panels</li>
+                                <li>SQL injection exploits</li>
+                                <li>Malware injection via outdated plugins</li>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--warning); margin-bottom: 1rem;">What Happens If You're Hit:</h3>
+                            <div class="service-features">
+                                <li>Customer data stolen, reputation destroyed</li>
+                                <li>Google blacklist = zero traffic overnight</li>
+                                <li>Ransom demands, complete data loss</li>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 1rem; color: var(--text-dim); margin-bottom: 1.5rem;">Security isn't optional. It's not expensive compared to the cost of a breach. Start with a comprehensive audit to know where you stand, then implement proper hardening and monitoring. Or ignore it and hope you're not next.</p>
+                    <a href="#services" class="btn" style="border-color: var(--warning); color: var(--warning);">See Security Services →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="services">
         <div class="container">
             <h2 class="section-title">Services</h2>
-            <p class="section-subtitle">Productized technical services designed to solve specific problems. Pick what you need, pay upfront, get it done.</p>
+            <p class="section-subtitle">Productized technical services designed to solve specific problems. Clear pricing, professional delivery.</p>
             
             <div class="services-grid">
                 <div class="service-card">
@@ -552,13 +643,14 @@
                         </div>
                         <div class="service-price">£600-1000</div>
                     </div>
-                    <p class="service-description">Comprehensive security assessment of your website or web application. Automated scanning plus manual review, delivered as actionable report.</p>
+                    <p class="service-description">Your website is under constant attack. Most businesses don't know they've been compromised until it's too late. Comprehensive security assessment finds vulnerabilities before attackers do - delivered as actionable report with prioritized fixes.</p>
                     <ul class="service-features">
-                        <li>Vulnerability scanning and assessment</li>
-                        <li>SSL/TLS configuration review</li>
-                        <li>Security headers analysis</li>
-                        <li>Detailed report with prioritized fixes</li>
-                        <li>Optional: Implementation of fixes (quoted separately)</li>
+                        <li>Automated + manual penetration testing</li>
+                        <li>SQL injection, XSS, CSRF vulnerability scanning</li>
+                        <li>SSL/TLS configuration and certificate analysis</li>
+                        <li>Security headers implementation review</li>
+                        <li>Critical findings flagged for immediate action</li>
+                        <li>Optional: We implement the fixes (quoted separately)</li>
                     </ul>
                     <div class="service-meta">Delivery: 3-5 business days</div>
                 </div>
@@ -588,13 +680,13 @@
                         </div>
                         <div class="service-price">£200-300</div>
                     </div>
-                    <p class="service-description">Proper SSL implementation, force HTTPS, security headers, basic hardening. Make your site trustworthy and secure.</p>
+                    <p class="service-description">An unsecured website loses customer trust instantly. Proper SSL, forced HTTPS, security headers, and server hardening aren't optional anymore - they're baseline requirements for doing business online.</p>
                     <ul class="service-features">
-                        <li>SSL certificate setup (Cloudflare or Let's Encrypt)</li>
-                        <li>Force HTTPS site-wide</li>
-                        <li>Security headers implementation</li>
-                        <li>Basic server hardening</li>
-                        <li>SSL rating verification (A+ grade)</li>
+                        <li>SSL certificate setup (Let's Encrypt or Cloudflare)</li>
+                        <li>Force HTTPS across entire site (no mixed content)</li>
+                        <li>Security headers: HSTS, CSP, X-Frame-Options, etc.</li>
+                        <li>Server hardening and access controls</li>
+                        <li>A+ SSL rating guaranteed (verified at SSL Labs)</li>
                     </ul>
                     <div class="service-meta">Delivery: 2-3 business days</div>
                 </div>
@@ -624,13 +716,14 @@
                         </div>
                         <div class="service-price">£250-500</div>
                     </div>
-                    <p class="service-description">Automated backup system setup. Your data protected, recoverable, and tested. Sleep better at night.</p>
+                    <p class="service-description">Ransomware doesn't care about your business. Server failures don't wait for convenient timing. Automated backup system with verified restoration means you can recover from any disaster - hacks, crashes, human error.</p>
                     <ul class="service-features">
-                        <li>Automated backup configuration</li>
-                        <li>Multiple backup locations (redundancy)</li>
-                        <li>Backup testing and verification</li>
-                        <li>Recovery procedure documentation</li>
-                        <li>Optional: Monthly monitoring (retainer)</li>
+                        <li>Encrypted automated backups (daily/weekly/monthly)</li>
+                        <li>Geographically redundant storage locations</li>
+                        <li>Regular backup integrity testing and verification</li>
+                        <li>Documented restoration procedures (tested, not theoretical)</li>
+                        <li>Protection against ransomware and data loss</li>
+                        <li>Optional: Monthly monitoring and reporting (retainer)</li>
                     </ul>
                     <div class="service-meta">Delivery: 3-5 business days</div>
                 </div>
@@ -679,9 +772,9 @@
             <div class="retainer-card">
                 <div class="retainer-content">
                     <div class="badge">Monthly Retainer</div>
-                    <h2 class="retainer-title">Ongoing Monitoring & Maintenance</h2>
+                    <h2 class="retainer-title">Ongoing Security & Infrastructure Monitoring</h2>
                     <div class="retainer-price">from £200/month</div>
-                    <p class="service-description">For clients who want peace of mind. We keep an eye on your infrastructure, catch problems before they become disasters, and handle routine maintenance.</p>
+                    <p class="service-description">Threats don't take holidays. For clients who want continuous protection - we monitor your infrastructure, catch security issues before they become breaches, and handle routine maintenance so you can focus on business.</p>
                     <div class="retainer-features">
                         <div class="service-features">
                             <li>Monthly security scans</li>
@@ -704,6 +797,10 @@
         <div class="container">
             <h2 class="section-title">How It Works</h2>
             <p class="section-subtitle">Straightforward process. Clear communication, realistic timelines, professional delivery.</p>
+            <div style="text-align: center; margin: 2rem 0 3rem; padding: 2rem; border: 2px solid var(--border); background: var(--surface);">
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem;">Professional Technical Services. <span style="color: var(--accent);">Fixed Pricing.</span> Clear Deliverables.</h3>
+                <p style="color: var(--text-dim); margin-top: 1rem;">No hourly billing. No scope creep. You know exactly what you're getting and what it costs.</p>
+            </div>
             
             <div class="process-steps">
                 <div class="step">
